@@ -27,17 +27,20 @@ const questions = [
     type: "list",
     name: "license",
     message: "What type of license should your project have?",
-    choices: [],
+    choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"],
+    default: "Use Arrow Keys",
   },
   {
     type: "input",
     name: "dependencies",
     message: "What command should be run to install dependencies?",
+    default: "npm i",
   },
   {
     type: "input",
     name: "test",
     message: "What command should be used to run test?",
+    default: "npm test",
   },
   {
     type: "input",
@@ -52,6 +55,8 @@ const questions = [
 ];
 inquirer.prompt(questions).then((answers) => {
   console.log(answers);
+  let markdown = generateMarkdown(answers);
+  writeToFile(markdown);
 });
 // .catch((error) => {
 //   if (error) {
@@ -63,12 +68,12 @@ inquirer.prompt(questions).then((answers) => {
 // });
 
 // function to write README file
-function writeToFile(fileName, data) {
-  fs.writeFile("README.txt", questions, function (err) {});
+function writeToFile(data) {
+  fs.writeFileSync("new_README.md", data);
 }
 
 // function to initialize program
-function init() {}
+//function init() {}
 
 // function call to initialize program
-init();
+//init();
